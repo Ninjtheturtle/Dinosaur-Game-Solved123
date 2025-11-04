@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nImplement NEAT reinforcement learning for Chrome Dinosaur Game\n\n- Added NEAT neural network integration for autonomous gameplay\n- Implemented 7-input, 3-output network architecture\n- Created evolution-based learning with population of 50 agents\n- Fixed jump physics with position-based ground detection\n- Added multi-generation support with proper pygame reinitialization\n- Configured NEAT parameters for optimal learning\n- Created comprehensive technical README documenting RL aspects\n\nGenerated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git remote add:*)",
+      "Bash(git push:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nUpdate README: make more concise and focus on current implementation\n\n- Removed comparisons to previous iterations\n- Removed folder structure section\n- Condensed content while maintaining technical accuracy\n- Streamlined sections for better readability\n\nGenerated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
     ],
     "deny": [],
     "ask": []

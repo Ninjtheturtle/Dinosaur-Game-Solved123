@@ -1,10 +1,14 @@
 # Chrome Dinosaur Game with NEAT AI
 
-A reinforcement learning implementation of the Chrome Dinosaur Game using the NEAT (NeuroEvolution of Augmating Topologies) algorithm. The AI learns to play the game through evolutionary neural networks.
+A reinforcement learning implementation of the Chrome Dinosaur Game using the NEAT (NeuroEvolution of Augmenting Topologies) algorithm. The AI learns to play the game through evolutionary neural networks.
+
+## Overview
+
+This project implements an autonomous agent that learns to play the Chrome Dinosaur Game using neuroevolution. Instead of traditional reinforcement learning methods like Q-learning or policy gradients, this implementation uses NEAT to evolve neural network topologies that control the dinosaur's actions.
 
 ## NEAT Framework
 
-NEAT is a genetic algorithm that evolves both the weights and structure of neural networks. Key features include:
+NEAT (NeuroEvolution of Augmenting Topologies) is a genetic algorithm that evolves both the weights and structure of neural networks. Key features include:
 
 - **Topology Evolution**: Networks start simple and complexify over generations
 - **Speciation**: Protects innovation by grouping similar network structures
@@ -33,32 +37,31 @@ NEAT is a genetic algorithm that evolves both the weights and structure of neura
 
 The network outputs are evaluated, and the action with the highest activation is selected.
 
-## Implementation
+## Implementation Details
 
 ### Evolutionary Process
 
-- **Population**: 50 dinosaurs per generation
-- **Fitness Function**: Distance traveled divided by 50
-- **Selection**: Top performers reproduce with mutation and crossover
-- **Termination**: Generation ends when all dinosaurs die or 60 seconds elapse
+1. **Population**: 50 dinosaurs per generation
+2. **Fitness Function**: Distance traveled divided by 50
+3. **Genome Evaluation**: Each genome controls one dinosaur
+4. **Selection**: Top performers reproduce with mutation and crossover
+5. **Termination**: Generation ends when all dinosaurs die or 60 seconds elapse
 
-### Game Mechanics
+### Physics and Game Mechanics
 
 - **Jump Velocity**: 8.5 units, decreases by 0.8 per frame (gravity)
 - **Ground Level**: Y = 310 pixels
+- **Jump Prevention**: Actions cannot interrupt mid-air jumps
 - **Collision Detection**: Pixel-perfect rect collision with obstacles
 - **Progressive Difficulty**: Game speed increases every 100 points
-- **Jump Behavior**: Actions cannot interrupt mid-air jumps
 
-## NEAT Configuration
+### Key Modifications from Manual Play
 
-Key parameters in `config.txt`:
-
-- **Population Size**: 50 genomes per generation
-- **Fitness Threshold**: 100,000 (effectively unlimited)
-- **Mutation Rates**: Weight (0.8), Bias (0.7), Add connection (0.5), Add node (0.2)
-- **Compatibility Threshold**: 3.0 for speciation
-- **Elitism**: Top 3 genomes always survive
+- Removed keyboard input system
+- Implemented AI action selection (run, jump, duck)
+- Added sensor data collection for neural network input
+- Integrated fitness calculation based on survival time
+- Consolidated update logic to prevent state conflicts
 
 ## Installation
 
@@ -67,37 +70,32 @@ Key parameters in `config.txt`:
 pip install pygame neat-python
 ```
 
-### Running the Simulation
+### Files
+- `main.py`: Main game loop and NEAT integration
+- `config.txt`: NEAT algorithm configuration parameters
+
+## Running the Simulation
 
 ```bash
 python main.py
 ```
 
-The simulation displays:
+The simulation will display:
 - Current generation number
 - Number of dinosaurs still alive
 - Current score
 - All active dinosaurs on screen simultaneously
 
-## Training Progression
+## NEAT Configuration
 
-- **Early generations**: Random jumping, immediate collisions
-- **Mid generations**: Basic obstacle avoidance emerges
-- **Late generations**: Timing improvements, strategic ducking
-- **Typical convergence**: 50-200 generations for competent play
+Key parameters in `config.txt`:
 
-## Technical Notes
-
-### Jump Mechanics
-
-The implementation uses position-based landing detection (Y >= 310) rather than velocity-based detection. This ensures smooth jump arcs without teleporting artifacts. Actions are prevented from interrupting jumps mid-flight through guard clauses.
-
-### Multi-Generation Support
-
-Each generation receives a fresh pygame environment to prevent state pollution. The `run_simulation` function reinitializes pygame and creates a new screen for each evolutionary cycle.
-
-## References
-
-- NEAT Paper: Stanley & Miikkulainen (2002)
-- NEAT-Python Library: https://neat-python.readthedocs.io/
-- Original Game: Chrome Browser offline game
+- **Population Size**: 50 genomes per generation
+- **Fitness Threshold**: 100,000 (effectively unlimited)
+- **Mutation Rates**:
+  - Weight mutation: 0.8
+  - Bias mutation: 0.7
+  - Add connection: 0.5
+  - Add node: 0.2
+- **Compatibility Threshold**: 3.0 for speciation
+- **Elitism**: Top 3 genomes always survive
