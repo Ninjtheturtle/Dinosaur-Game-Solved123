@@ -55,14 +55,6 @@ The network outputs are evaluated, and the action with the highest activation is
 - **Collision Detection**: Pixel-perfect rect collision with obstacles
 - **Progressive Difficulty**: Game speed increases every 100 points
 
-### Key Modifications from Manual Play
-
-- Removed keyboard input system
-- Implemented AI action selection (run, jump, duck)
-- Added sensor data collection for neural network input
-- Integrated fitness calculation based on survival time
-- Consolidated update logic to prevent state conflicts
-
 ## Installation
 
 ### Requirements
